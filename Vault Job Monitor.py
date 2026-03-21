@@ -6,7 +6,7 @@ import os
 VAULT_DOMAIN = "https://cdms-vault-training.veevavault.com"
 API_VERSION = "v25.3" # Update to your current API version if needed
 JOB_ID = "1122914" # The ID of the job you are monitoring
-CHAT_WEBHOOK_URL = "https://chat.googleapis.com/v1/spaces/AAQAayWH0qg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=eod_3nC3gj9_v_ewyA_cGpiHAiKF-qS3gIkus6rMg9A"
+CHAT_WEBHOOK_URL = ""
 POLL_INTERVAL_SECONDS = 600 # Check every 10 minutes
 
 # The total number of records you expect the job to create
