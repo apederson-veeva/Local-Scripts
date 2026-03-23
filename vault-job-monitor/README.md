@@ -62,6 +62,19 @@ A Python script to monitor the status of a Veeva Vault job and send periodic upd
 3.  **Run the Cells:**
     Follow the instructions in the notebook to install dependencies and start the monitor.
 
+## Google Chat Webhook URL
+
+To get a Google Chat webhook URL for your notifications:
+
+1.  Open **Google Chat** in your browser.
+2.  Navigate to the **Space** where you want to receive notifications.
+3.  Click the **Space name** at the top and select **Apps & integrations**.
+4.  Click **Webhooks**.
+5.  If you don't have a webhook yet, click **Add webhook**.
+6.  Give the webhook a name (e.g., "Vault Monitor") and an optional Avatar URL.
+7.  Click **Save**.
+8.  Copy the **URL** that is generated. This is your `CHAT_WEBHOOK_URL`.
+
 ## Configuration Variables
 
 | Variable | Description | Default |
