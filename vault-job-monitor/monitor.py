@@ -1,18 +1,20 @@
 import requests
 import time
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # --- Configuration ---
-VAULT_DOMAIN = "https://cdms-vault-training.veevavault.com"
-API_VERSION = "v25.3" # Update to your current API version if needed
-JOB_ID = "1122914" # The ID of the job you are monitoring
-CHAT_WEBHOOK_URL = ""
-POLL_INTERVAL_SECONDS = 600 # Check every 10 minutes
+VAULT_DOMAIN = os.environ.get("VAULT_DOMAIN", "https://cdms-vault-training.veevavault.com")
+API_VERSION = os.environ.get("API_VERSION", "v25.3")
+JOB_ID = os.environ.get("JOB_ID", "1122914")
+CHAT_WEBHOOK_URL = os.environ.get("CHAT_WEBHOOK_URL", "")
+POLL_INTERVAL_SECONDS = int(os.environ.get("POLL_INTERVAL_SECONDS", 600))
+TOTAL_EXPECTED = int(os.environ.get("TOTAL_EXPECTED", 268367))
 
-# The total number of records you expect the job to create
-TOTAL_EXPECTED = 268367
-
-# Credentials (preferably set as environment variables in your OS)
+# Credentials
 USERNAME = os.environ.get("VEEVA_USERNAME", "")
 PASSWORD = os.environ.get("VEEVA_PASSWORD", "")
 
@@ -99,7 +101,10 @@ def get_training_assignment_count():
 
 def send_chat_notification(status, total_created, is_finished=False):
     """Sends a formatted message to the Google Chat webhook."""
-    
+    if not CHAT_WEBHOOK_URL:
+        print("⚠️ Warning: CHAT_WEBHOOK_URL not set. Skipping notification.")
+        return
+
     if not is_finished:
         message_text = f"⏳ *Veeva Vault Polling Update*\nJob ID: `{JOB_ID}` is currently processing.\nCurrent Status: *{status}*\nTotal Created: *{total_created} / {TOTAL_EXPECTED}*"
     else:
